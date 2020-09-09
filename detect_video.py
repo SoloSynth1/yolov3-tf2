@@ -21,6 +21,8 @@ flags.DEFINE_string('output', None, 'path to output video')
 flags.DEFINE_string('output_format', 'XVID', 'codec used in VideoWriter when saving video to file')
 flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
 
+# headless/XServer-less mode. when enabled, cv2 will not try to show the image/video
+flags.DEFINE_boolean('skip_x_output', True, 'skip showing image/video to X Server')
 
 def main(_argv):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -59,9 +61,10 @@ def main(_argv):
         _, img = vid.read()
 
         if img is None:
-            logging.warning("Empty Frame")
-            time.sleep(0.1)
-            continue
+            # logging.warning("Empty Frame")
+            # time.sleep(0.1)
+            # continue
+            break
 
         img_in = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img_in = tf.expand_dims(img_in, 0)
@@ -78,9 +81,10 @@ def main(_argv):
                           cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
         if FLAGS.output:
             out.write(img)
-        cv2.imshow('output', img)
-        if cv2.waitKey(1) == ord('q'):
-            break
+        if not FLAGS.skip_x_output:
+            cv2.imshow('output', img)
+            if cv2.waitKey(1) == ord('q'):
+                break
 
     cv2.destroyAllWindows()
 
