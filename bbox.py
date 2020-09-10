@@ -8,7 +8,7 @@ def get_colors(class_names, seed=SEED):
         random.seed(seed)
     colors = {}
     for key in class_names:
-        colors[key] = tuple([random.randint(0, 255) for _ in range(3)])
+        colors[key] = tuple([random.randint(100, 255) for _ in range(3)])
     return colors
 
 
