@@ -24,6 +24,7 @@ flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
 # headless/XServer-less mode. when enabled, cv2 will not try to show the image/video
 flags.DEFINE_boolean('skip_x_output', True, 'skip showing image/video to X Server')
 
+
 def main(_argv):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     for physical_device in physical_devices:
@@ -78,7 +79,7 @@ def main(_argv):
 
         img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
         img = cv2.putText(img, "Time: {:.2f}ms".format(sum(times)/len(times)*1000), (0, 30),
-                          cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
+                          cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255), 2)
         if FLAGS.output:
             out.write(img)
         if not FLAGS.skip_x_output:
