@@ -79,7 +79,7 @@ def main(_argv):
 
         img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
         img = cv2.putText(img, "Time: {:.2f}ms".format(sum(times)/len(times)*1000), (0, 30),
-                          cv2.FONT_HERSHEY_DUPLEX, 0.9, (0, 0, 255), 1)
+                          cv2.FONT_HERSHEY_DUPLEX, 0.8, (0, 0, 255), 2)
         if FLAGS.output:
             out.write(img)
         if not FLAGS.skip_x_output:
