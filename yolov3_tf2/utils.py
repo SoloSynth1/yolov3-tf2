@@ -115,10 +115,10 @@ def draw_outputs(img, outputs, class_names):
         class_name = class_names[int(classes[i])]
         class_color = class_colors[class_name]
 
-        img = cv2.rectangle(img, x1y1, x2y2, class_color, 2)
+        img = cv2.rectangle(img, x1y1, x2y2, class_color, 1)
         img = cv2.putText(img, '{} {:.4f}'.format(
             class_name, objectness[i]),
-            x1y1, cv2.FONT_HERSHEY_DUPLEX, 1, class_color, 2)
+            x1y1, cv2.FONT_HERSHEY_DUPLEX, 0.9, class_color, 1)
     return img
 
 
@@ -139,8 +139,8 @@ def draw_labels(x, y, class_names):
 
         img = cv2.rectangle(img, x1y1, x2y2, class_color, 2)
         img = cv2.putText(img, class_name,
-                          x1y1, cv2.FONT_HERSHEY_COMPLEX_SMALL,
-                          1, class_color, 2)
+                          x1y1, cv2.FONT_HERSHEY_DUPLEX,
+                          0.9, class_color, 1)
     return img
 
 
